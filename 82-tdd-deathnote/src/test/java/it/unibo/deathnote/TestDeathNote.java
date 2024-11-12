@@ -47,19 +47,46 @@ class TestDeathNote {
 
     @Test
     public void testHumanName(){
-        String name="nicholas magi";
-        String cause="hot sex night";
-        String detail="too much males";
+        String name="Paolo Bitta";
+        String cause="murder";
+        String detail="following an argument with his friend Luca";
         assertFalse(deathNote.isNameWritten(name));
         deathNote.writeName(name);
         assert(deathNote.isNameWritten(name));
         deathNote.writeDeathCause(cause);
         deathNote.writeDetails(detail);
-        assertFalse(deathNote.isNameWritten("magi nicholas"));
+        assertFalse(deathNote.isNameWritten("Luca Giurato"));
         assertFalse(deathNote.isNameWritten(""));
     }
 
     @Test
-    public void testTimer(){}
+    public void test4() throws InterruptedException{
+        assertThrows(Exception.class, ()-> deathNote.writeDeathCause("cold"));
+        deathNote.writeName("Paolo Ruffini");
+        deathNote.writeDeathCause("heart attack");
+        String name="Giancarlo Magalli";
+        String cause="karting accident";
+        deathNote.writeName(name);
+        assert(deathNote.writeDeathCause(cause));
+        assertEquals(cause,deathNote.getDeathCause(name));
+        Thread.sleep(100);
+        assertThrows(Exception.class, ()-> deathNote.writeDeathCause("cold"));
+        assertEquals(cause,deathNote.getDeathCause(name));
+    }
+
+    @Test
+    public void test5() throws InterruptedException{
+        assertThrows(Exception.class, ()-> deathNote.writeDetails("fighting with Cat-Man (the sarabanda one)"));
+        String name="Fabio de Luigi";
+        deathNote.writeName(name);
+        assert(deathNote.getDeathCause(name).isEmpty());
+        String cause="ran for too long";
+        String cause2="Falling from the Messina's bridge";
+        deathNote.writeDeathCause(cause);
+        deathNote.writeName("Ingegner Cane");
+        Thread.sleep(6100);
+        deathNote.writeDetails(cause2);
+        assertFalse(cause.equals(cause2));
+    }
 
 }
