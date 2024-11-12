@@ -1,10 +1,12 @@
 package it.unibo.mvc;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.TextField;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,13 +35,22 @@ public class MiniGUI {
         canvas.add(write, BorderLayout.CENTER);
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        final JPanel canvas2 = new JPanel();
+        canvas2.setLayout(new BoxLayout(canvas2, BoxLayout.X_AXIS));
+        canvas.add(canvas2,BorderLayout.CENTER);
+        canvas2.add(write);
+        final TextField ResultTxt=new TextField();
+        ResultTxt.setVisible(true);
+        canvas.add(ResultTxt,BorderLayout.NORTH);
         /*
          * Handlers
          */
         write.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                System.out.println(randomGenerator.nextInt());
+                Integer i=randomGenerator.nextInt();
+                System.out.println(i);
+                ResultTxt.setText(Integer.toString(i));
             }
         });
     }
@@ -57,6 +68,7 @@ public class MiniGUI {
         final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         final int sw = (int) screen.getWidth();
         final int sh = (int) screen.getHeight();
+        
         frame.setSize(sw / PROPORTION, sh / PROPORTION);
         /*
          * Instead of appearing at (0,0), upper left corner of the screen, this

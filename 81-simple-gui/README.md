@@ -1,11 +1,11 @@
-# Simple View
+   # Simple View
 
 # Ex01: simple monolithic GUI
 
 ## Understand
 1. Read the class carefully
 2. Read the comments carefully
-3. Note the use of ``Toolkit`` to get the current screen resolution, and dimension the window correctly
+3. Note the use of ``Toolkit`` to get the current   screen resolution, and dimension the window correctly
 4. Note the use of ``JFrame. setLocationByPlatform()`` to delegate the window positioning to the system composer
    (the part of the graphical stack in charge of effectively drawing windows, borders, decorations and effects).
 
