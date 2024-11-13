@@ -1,6 +1,5 @@
 package it.unibo.deathnote.impl;
 
-import java.sql.Time;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,7 +19,7 @@ public class DeathNoteImplementation implements DeathNote {
         }
 
         public DeathData(String name) {
-            this(name, null, null);
+            this(name, "", "");
         }
 
         public String getName() {
@@ -73,18 +72,30 @@ public class DeathNoteImplementation implements DeathNote {
     }
 
     @Override
-    public boolean writeDeathCause(String cause) {
-        long tmp = System.currentTimeMillis();
-        if (timeLastWrite - tmp < 40) {
-            deaths.getLast().setCause(cause);
-            return true;
+    public boolean writeDeathCause(String cause) throws Exception {
+        if (deaths.getLast().getCause() == "") {
+            long tmp = System.currentTimeMillis();
+            if (timeLastWrite - tmp < 40) {
+                deaths.getLast().setCause(cause);
+                return true;
+            }
+            deaths.remove(deaths.getLast());
+            return false;
         }
-        deaths.remove(deaths.getLast());
-        return false;
+        throw new Exception();
     }
 
     @Override
-    public boolean writeDetails(String details) {
+    public boolean writeDetails(String details) throws Exception {
+        if (deaths.getLast().getDetails() == "") {
+            long tmp = System.currentTimeMillis();
+            if (timeLastWrite - tmp < 6040) {
+                deaths.getLast().setDetails(details);
+                return true;
+            }
+            return false;
+        }
+        throw new Exception();
     }
 
     @Override

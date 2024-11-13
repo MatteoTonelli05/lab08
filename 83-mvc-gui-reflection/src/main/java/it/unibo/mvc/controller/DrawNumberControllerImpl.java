@@ -7,7 +7,8 @@ import it.unibo.mvc.api.DrawNumberView;
 import java.util.Objects;
 
 /**
- * This class implements the game controller. It orchestrates the game, exposes methods to its observers
+ * This class implements the game controller. It orchestrates the game, exposes
+ * methods to its observers
  * (the boundaries), and sends results to them.
  */
 public final class DrawNumberControllerImpl implements DrawNumberController {
